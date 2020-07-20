@@ -1,0 +1,33 @@
+server:
+  port: 8802
+
+spring:
+  application:
+    name: cloud-stream-consumer
+  cloud:
+    stream:
+      binders:
+        defaultRabbit:
+          type: rabbit
+          environment:
+            rabbitmq:
+              host: localhost
+              port: 5672
+              username: guest
+              password: guest
+      bindings:
+        input:
+          destination: studyExchange
+          content-type: application/json
+          binder: defaultRabbit
+#          group: bignoseA
+
+eureka:
+  instance:
+    instance-id: reveive-8802.com
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 5
+    lease-renewal-interval-in-seconds: 2
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/

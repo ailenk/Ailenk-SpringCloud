@@ -1,0 +1,41 @@
+server:
+  port: 3344
+
+spring:
+  application:
+    # 注册进Eureka服务器的微服务名
+    name: cloud-spring-center
+  cloud:
+    config:
+      server:
+        git:
+          # git仓库地址
+          uri: https://gitee.com/ailenk/SpringCloud.git
+          # 搜索目录
+          search-paths:
+            - config
+          default-label: master
+      # 读取分支
+  #      label: master
+
+  # RabbitMQ相关配置
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+# RabbitMQ 相关配置，暴露bus刷新配置的端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "bus-refresh"
+
+eureka:
+  instance:
+    instance-id: config-cneter3344
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/
